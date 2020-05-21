@@ -23,7 +23,7 @@ public class InMemoryTimeEntryRepositoryTest {
         TimeEntry expected = new TimeEntry(timeEntryId, projectId, userId, LocalDate.parse("2017-01-08"), 8);
         assertThat(createdTimeEntry).isEqualTo(expected);
 
-        TimeEntry readEntry = repo.find(createdTimeEntry.getId());
+        TimeEntry readEntry = repo.find(createdTimeEntry.getTimeEntryId());
         assertThat(readEntry).isEqualTo(expected);
     }
 
@@ -70,12 +70,12 @@ public class InMemoryTimeEntryRepositoryTest {
         TimeEntry created = repo.create(new TimeEntry(123L, 456L, LocalDate.parse("2017-01-08"), 8));
 
         TimeEntry updatedEntry = repo.update(
-                created.getId(),
+                created.getTimeEntryId(),
                 new TimeEntry(321L, 654L, LocalDate.parse("2017-01-09"), 5));
 
-        TimeEntry expected = new TimeEntry(created.getId(), 321L, 654L, LocalDate.parse("2017-01-09"), 5);
+        TimeEntry expected = new TimeEntry(created.getTimeEntryId(), 321L, 654L, LocalDate.parse("2017-01-09"), 5);
         assertThat(updatedEntry).isEqualTo(expected);
-        assertThat(repo.find(created.getId())).isEqualTo(expected);
+        assertThat(repo.find(created.getTimeEntryId())).isEqualTo(expected);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class InMemoryTimeEntryRepositoryTest {
         long userId = 456L;
         TimeEntry created = repo.create(new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8));
 
-        repo.delete(created.getId());
+        repo.delete(created.getTimeEntryId());
         assertThat(repo.list()).isEmpty();
     }
 
@@ -109,12 +109,12 @@ public class InMemoryTimeEntryRepositoryTest {
         long userId = 456L;
         TimeEntry created = repo.create(new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8));
 
-        assertThat(created.getId()).isEqualTo(1);
+        assertThat(created.getTimeEntryId()).isEqualTo(1);
 
-        repo.delete(created.getId());
+        repo.delete(created.getTimeEntryId());
 
         TimeEntry createdSecond = repo.create(new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8));
 
-        assertThat(createdSecond.getId()).isEqualTo(2);
+        assertThat(createdSecond.getTimeEntryId()).isEqualTo(2);
     }
 }
