@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class TimeEntry {
-    private long timeEntryId;
+    private long id;
     private long projectId;
     private long userId;
     private LocalDate date;
     private int hours;
 
     public TimeEntry(long timeEntryId, long projectId, long userId, LocalDate date, int hours) {
-        this.timeEntryId=timeEntryId;
+        this.id =timeEntryId;
         this.projectId=projectId;
         this.userId=userId;
         this.date=date;
@@ -29,8 +29,8 @@ public class TimeEntry {
 
     }
 
-    public long getTimeEntryId() {
-        return timeEntryId;
+    public long getId() {
+        return id;
     }
 
     public long getProjectId() {
@@ -54,7 +54,7 @@ public class TimeEntry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TimeEntry timeEntry = (TimeEntry) o;
-        return timeEntryId == timeEntry.timeEntryId &&
+        return id == timeEntry.id &&
                 projectId == timeEntry.projectId &&
                 userId == timeEntry.userId &&
                 hours == timeEntry.hours &&
@@ -63,13 +63,13 @@ public class TimeEntry {
 
     @Override
     public int hashCode() {
-        return Objects.hash(timeEntryId, projectId, userId, date, hours);
+        return Objects.hash(id, projectId, userId, date, hours);
     }
 
     @Override
     public String toString() {
         return "TimeEntry{" +
-                "timeEntryId=" + timeEntryId +
+                "timeEntryId=" + id +
                 ", projectId=" + projectId +
                 ", userId=" + userId +
                 ", date=" + date +
